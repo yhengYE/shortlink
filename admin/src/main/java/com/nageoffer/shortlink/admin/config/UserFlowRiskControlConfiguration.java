@@ -15,51 +15,32 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.dao.entity;
+package com.nageoffer.shortlink.admin.config;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nageoffer.shortlink.admin.common.database.BaseDO;
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
- * 用户持久层实体
+ * 用户操作流量风控配置文件
  */
 @Data
-@TableName("t_user")
-public class UserDO extends BaseDO {
+@Component
+@ConfigurationProperties(prefix = "short-link.flow-limit")
+public class UserFlowRiskControlConfiguration {
 
     /**
-     * id
+     * 是否开启用户流量风控验证
      */
-    private Long id;
+    private Boolean enable;
 
     /**
-     * 用户名
+     * 流量风控时间窗口，单位：秒
      */
-    private String username;
+    private String timeWindow;
 
     /**
-     * 密码
+     * 流量风控时间窗口内可访问次数
      */
-    private String password;
-
-    /**
-     * 真实姓名
-     */
-    private String realName;
-
-    /**
-     * 手机号
-     */
-    private String phone;
-
-    /**
-     * 邮箱
-     */
-    private String mail;
-
-    /**
-     * 注销时间戳
-     */
-    private Long deletionTime;
+    private Long maxAccessCount;
 }

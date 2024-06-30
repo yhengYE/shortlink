@@ -15,51 +15,35 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.dao.entity;
+package com.nageoffer.shortlink.admin.common.database;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nageoffer.shortlink.admin.common.database.BaseDO;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
- * 用户持久层实体
+ * 数据库持久层对象基础属性
  */
 @Data
-@TableName("t_user")
-public class UserDO extends BaseDO {
+public class BaseDO {
 
     /**
-     * id
+     * 创建时间
      */
-    private Long id;
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
 
     /**
-     * 用户名
+     * 修改时间
      */
-    private String username;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     /**
-     * 密码
+     * 删除标识 0：未删除 1：已删除
      */
-    private String password;
-
-    /**
-     * 真实姓名
-     */
-    private String realName;
-
-    /**
-     * 手机号
-     */
-    private String phone;
-
-    /**
-     * 邮箱
-     */
-    private String mail;
-
-    /**
-     * 注销时间戳
-     */
-    private Long deletionTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Integer delFlag;
 }

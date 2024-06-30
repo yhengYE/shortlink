@@ -15,23 +15,16 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.dao.entity;
+package com.nageoffer.shortlink.admin.dto.resp;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nageoffer.shortlink.admin.common.database.BaseDO;
 import lombok.Data;
 
 /**
- * 用户持久层实体
+ * 用户注册请求参数
+ * 公众号：马丁玩编程，回复：加群，添加马哥微信（备注：link）获取项目资料
  */
 @Data
-@TableName("t_user")
-public class UserDO extends BaseDO {
-
-    /**
-     * id
-     */
-    private Long id;
+public class UserRegisterReqDTO {
 
     /**
      * 用户名
@@ -57,9 +50,4 @@ public class UserDO extends BaseDO {
      * 邮箱
      */
     private String mail;
-
-    /**
-     * 注销时间戳
-     */
-    private Long deletionTime;
 }

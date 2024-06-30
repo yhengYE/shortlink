@@ -15,51 +15,25 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.dao.entity;
-
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nageoffer.shortlink.admin.common.database.BaseDO;
-import lombok.Data;
+package com.nageoffer.shortlink.admin.common.constant;
 
 /**
- * 用户持久层实体
+ * 短链接后管 Redis 缓存常量类
  */
-@Data
-@TableName("t_user")
-public class UserDO extends BaseDO {
+public class RedisCacheConstant {
 
     /**
-     * id
+     * 用户注册分布式锁
      */
-    private Long id;
+    public static final String LOCK_USER_REGISTER_KEY = "short-link:lock_user-register:";
 
     /**
-     * 用户名
+     * 分组创建分布式锁
      */
-    private String username;
+    public static final String LOCK_GROUP_CREATE_KEY = "short-link:lock_group-create:%s";
 
     /**
-     * 密码
+     * 用户登录缓存标识
      */
-    private String password;
-
-    /**
-     * 真实姓名
-     */
-    private String realName;
-
-    /**
-     * 手机号
-     */
-    private String phone;
-
-    /**
-     * 邮箱
-     */
-    private String mail;
-
-    /**
-     * 注销时间戳
-     */
-    private Long deletionTime;
+    public static final String USER_LOGIN_KEY = "short-link:login:";
 }
