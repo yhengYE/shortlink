@@ -5,7 +5,7 @@ spring:
     datasource:
       username: root
       password: p698754321
-      url: jdbc:mysql://127.0.0.1:3306/link?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8
+      url: jdbc:mysql://127.0.0.1:3306/t_user?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8
       driver-class-name: com.mysql.cj.jdbc.Driver
       hikari:
         connection-test-query: select 1
@@ -18,3 +18,4 @@ spring:
       redis:
         host: 127.0.0.1
         port: 6379
+        password: p698754321
