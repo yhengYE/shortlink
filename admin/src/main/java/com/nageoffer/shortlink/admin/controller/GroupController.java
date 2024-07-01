@@ -37,7 +37,6 @@ import java.util.List;
 
 /**
  * 短链接分组控制层
- * 公众号：马丁玩编程，回复：加群，添加马哥微信（备注：link）获取项目资料
  */
 @RestController
 @RequiredArgsConstructor
@@ -54,13 +53,13 @@ public class GroupController {
         return Results.success();
     }
 
-//    /**
-//     * 查询短链接分组集合
-//     */
-//    @GetMapping("/api/short-link/admin/v1/group")
-//    public Result<List<ShortLinkGroupRespDTO>> listGroup() {
-//        return Results.success(groupService.listGroup());
-//    }
+    /**
+     * 查询短链接分组集合
+     */
+    @GetMapping("/api/short-link/admin/v1/group")
+    public Result<List<ShortLinkGroupRespDTO>> listGroup() {
+        return Results.success(groupService.listGroup());
+    }
 //
 //    /**
 //     * 修改短链接分组名称

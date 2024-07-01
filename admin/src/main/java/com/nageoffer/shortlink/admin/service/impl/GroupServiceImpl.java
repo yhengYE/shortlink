@@ -113,24 +113,24 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         }
     }
 
-//    @Override
-//    public List<ShortLinkGroupRespDTO> listGroup() {
-//        LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
-//                .eq(GroupDO::getDelFlag, 0)
-//                .eq(GroupDO::getUsername, UserContext.getUsername())
-//                .orderByDesc(GroupDO::getSortOrder, GroupDO::getUpdateTime);
-//        List<GroupDO> groupDOList = baseMapper.selectList(queryWrapper);
-//        Result<List<ShortLinkGroupCountQueryRespDTO>> listResult = shortLinkActualRemoteService
-//                .listGroupShortLinkCount(groupDOList.stream().map(GroupDO::getGid).toList());
-//        List<ShortLinkGroupRespDTO> shortLinkGroupRespDTOList = BeanUtil.copyToList(groupDOList, ShortLinkGroupRespDTO.class);
-//        shortLinkGroupRespDTOList.forEach(each -> {
-//            Optional<ShortLinkGroupCountQueryRespDTO> first = listResult.getData().stream()
-//                    .filter(item -> Objects.equals(item.getGid(), each.getGid()))
-//                    .findFirst();
-//            first.ifPresent(item -> each.setShortLinkCount(first.get().getShortLinkCount()));
-//        });
-//        return shortLinkGroupRespDTOList;
-//    }
+    @Override
+    public List<ShortLinkGroupRespDTO> listGroup() {
+        LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
+                .eq(GroupDO::getDelFlag, 0)
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .orderByDesc(GroupDO::getSortOrder, GroupDO::getUpdateTime);
+        List<GroupDO> groupDOList = baseMapper.selectList(queryWrapper);
+        Result<List<ShortLinkGroupCountQueryRespDTO>> listResult = shortLinkActualRemoteService
+                .listGroupShortLinkCount(groupDOList.stream().map(GroupDO::getGid).toList());
+        List<ShortLinkGroupRespDTO> shortLinkGroupRespDTOList = BeanUtil.copyToList(groupDOList, ShortLinkGroupRespDTO.class);
+        shortLinkGroupRespDTOList.forEach(each -> {
+            Optional<ShortLinkGroupCountQueryRespDTO> first = listResult.getData().stream()
+                    .filter(item -> Objects.equals(item.getGid(), each.getGid()))
+                    .findFirst();
+            first.ifPresent(item -> each.setShortLinkCount(first.get().getShortLinkCount()));
+        });
+        return shortLinkGroupRespDTOList;
+    }
 //
 //    @Override
 //    public void updateGroup(ShortLinkGroupUpdateReqDTO requestParam) {

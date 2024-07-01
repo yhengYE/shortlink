@@ -15,23 +15,36 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.dto.req;
+package com.nageoffer.shortlink.admin.common.biz.user;
 
+import com.alibaba.fastjson2.annotation.JSONField;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 短链接分组排序参数
+ * 用户信息实体
  */
 @Data
-public class ShortLinkGroupSortReqDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class UserInfoDTO {
 
     /**
-     * 分组ID
+     * 用户 ID
      */
-    private String gid;
+    @JSONField(name = "id")
+    private String userId;
 
     /**
-     * 排序
+     * 用户名
      */
-    private Integer sortOrder;
+    private String username;
+
+    /**
+     * 真实姓名
+     */
+    private String realName;
 }
