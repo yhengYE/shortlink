@@ -14,6 +14,7 @@ import com.nageoffer.shortlink.admin.dao.entity.UserDO;
 import com.nageoffer.shortlink.admin.dao.mapper.UserMapper;
 import com.nageoffer.shortlink.admin.dto.resp.UserRegisterReqDTO;
 import com.nageoffer.shortlink.admin.dto.resp.UserRespDTO;
+import com.nageoffer.shortlink.admin.dto.resp.UserUpdateReqDTO;
 import com.nageoffer.shortlink.admin.service.GroupService;
 import com.nageoffer.shortlink.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -83,15 +84,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         }
     }
 
-//    @Override
-//    public void update(UserUpdateReqDTO requestParam) {
+    @Override
+    public void update(UserUpdateReqDTO requestParam) {
 //        if (!Objects.equals(requestParam.getUsername(), UserContext.getUsername())) {
 //            throw new ClientException("当前登录用户修改请求异常");
 //        }
-//        LambdaUpdateWrapper<UserDO> updateWrapper = Wrappers.lambdaUpdate(UserDO.class)
-//                .eq(UserDO::getUsername, requestParam.getUsername());
-//        baseMapper.update(BeanUtil.toBean(requestParam, UserDO.class), updateWrapper);
-//    }
+        LambdaUpdateWrapper<UserDO> updateWrapper = Wrappers.lambdaUpdate(UserDO.class)
+                .eq(UserDO::getUsername, requestParam.getUsername());
+        baseMapper.update(BeanUtil.toBean(requestParam, UserDO.class), updateWrapper);
+    }
 //
 //    @Override
 //    public UserLoginRespDTO login(UserLoginReqDTO requestParam) {
