@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.dto.resp;
+package com.nageoffer.shortlink.admin.dto.req;
 
 import lombok.Data;
 

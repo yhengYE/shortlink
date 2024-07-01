@@ -3,10 +3,12 @@ package com.nageoffer.shortlink.admin.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.nageoffer.shortlink.admin.common.convention.result.Result;
 import com.nageoffer.shortlink.admin.common.convention.result.Results;
+import com.nageoffer.shortlink.admin.dto.req.UserLoginReqDTO;
 import com.nageoffer.shortlink.admin.dto.resp.UserActualRespDTO;
-import com.nageoffer.shortlink.admin.dto.resp.UserRegisterReqDTO;
+import com.nageoffer.shortlink.admin.dto.req.UserRegisterReqDTO;
+import com.nageoffer.shortlink.admin.dto.resp.UserLoginRespDTO;
 import com.nageoffer.shortlink.admin.dto.resp.UserRespDTO;
-import com.nageoffer.shortlink.admin.dto.resp.UserUpdateReqDTO;
+import com.nageoffer.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.nageoffer.shortlink.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -62,14 +64,14 @@ public class UserController {
         userService.update(requestParam);
         return Results.success();
     }
-//
-//    /**
-//     * 用户登录
-//     */
-//    @PostMapping("/api/short-link/admin/v1/user/login")
-//    public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam) {
-//        return Results.success(userService.login(requestParam));
-//    }
+
+    /**
+     * 用户登录
+     */
+    @PostMapping("/api/short-link/admin/v1/user/login")
+    public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam) {
+        return Results.success(userService.login(requestParam));
+    }
 //
 //    /**
 //     * 检查用户是否登录
