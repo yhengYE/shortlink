@@ -63,18 +63,18 @@ import static com.nageoffer.shortlink.admin.common.constant.RedisCacheConstant.L
 public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implements GroupService {
 
       private final RBloomFilter<String> gidRegisterCachePenetrationBloomFilter;
-//    private final GroupUniqueMapper groupUniqueMapper;
-//    private final ShortLinkActualRemoteService shortLinkActualRemoteService;
-//    private final RedissonClient redissonClient;
-//
-//    @Value("${short-link.group.max-num}")
-//    private Integer groupMaxNum;
-//
-//    @Override
-//    public void saveGroup(String groupName) {
-//        saveGroup(UserContext.getUsername(), groupName);
-//    }
-//
+    private final GroupUniqueMapper groupUniqueMapper;
+    private final ShortLinkActualRemoteService shortLinkActualRemoteService;
+    private final RedissonClient redissonClient;
+
+    @Value("${short-link.group.max-num}")
+    private Integer groupMaxNum;
+
+    @Override
+    public void saveGroup(String groupName) {
+        saveGroup(UserContext.getUsername(), groupName);
+    }
+
     @Override
     public void saveGroup(String username, String groupName) {
         RLock lock = redissonClient.getLock(String.format(LOCK_GROUP_CREATE_KEY, username));
@@ -131,55 +131,55 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         });
         return shortLinkGroupRespDTOList;
     }
-//
-//    @Override
-//    public void updateGroup(ShortLinkGroupUpdateReqDTO requestParam) {
-//        LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
-//                .eq(GroupDO::getUsername, UserContext.getUsername())
-//                .eq(GroupDO::getGid, requestParam.getGid())
-//                .eq(GroupDO::getDelFlag, 0);
-//        GroupDO groupDO = new GroupDO();
-//        groupDO.setName(requestParam.getName());
-//        baseMapper.update(groupDO, updateWrapper);
-//    }
-//
-//    @Override
-//    public void deleteGroup(String gid) {
-//        LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
-//                .eq(GroupDO::getUsername, UserContext.getUsername())
-//                .eq(GroupDO::getGid, gid)
-//                .eq(GroupDO::getDelFlag, 0);
-//        GroupDO groupDO = new GroupDO();
-//        groupDO.setDelFlag(1);
-//        baseMapper.update(groupDO, updateWrapper);
-//    }
-//
-//    @Override
-//    public void sortGroup(List<ShortLinkGroupSortReqDTO> requestParam) {
-//        requestParam.forEach(each -> {
-//            GroupDO groupDO = GroupDO.builder()
-//                    .sortOrder(each.getSortOrder())
-//                    .build();
-//            LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
-//                    .eq(GroupDO::getUsername, UserContext.getUsername())
-//                    .eq(GroupDO::getGid, each.getGid())
-//                    .eq(GroupDO::getDelFlag, 0);
-//            baseMapper.update(groupDO, updateWrapper);
-//        });
-//    }
-//
-//    private String saveGroupUniqueReturnGid() {
-//        String gid = RandomGenerator.generateRandom();
-//        if (!gidRegisterCachePenetrationBloomFilter.contains(gid)) {
-//            GroupUniqueDO groupUniqueDO = GroupUniqueDO.builder()
-//                    .gid(gid)
-//                    .build();
-//            try {
-//                groupUniqueMapper.insert(groupUniqueDO);
-//            } catch (DuplicateKeyException e) {
-//                return null;
-//            }
-//        }
-//        return gid;
-//    }
+
+    @Override
+    public void updateGroup(ShortLinkGroupUpdateReqDTO requestParam) {
+        LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .eq(GroupDO::getGid, requestParam.getGid())
+                .eq(GroupDO::getDelFlag, 0);
+        GroupDO groupDO = new GroupDO();
+        groupDO.setName(requestParam.getName());
+        baseMapper.update(groupDO, updateWrapper);
+    }
+
+    @Override
+    public void deleteGroup(String gid) {
+        LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .eq(GroupDO::getGid, gid)
+                .eq(GroupDO::getDelFlag, 0);
+        GroupDO groupDO = new GroupDO();
+        groupDO.setDelFlag(1);
+        baseMapper.update(groupDO, updateWrapper);
+    }
+
+    @Override
+    public void sortGroup(List<ShortLinkGroupSortReqDTO> requestParam) {
+        requestParam.forEach(each -> {
+            GroupDO groupDO = GroupDO.builder()
+                    .sortOrder(each.getSortOrder())
+                    .build();
+            LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                    .eq(GroupDO::getUsername, UserContext.getUsername())
+                    .eq(GroupDO::getGid, each.getGid())
+                    .eq(GroupDO::getDelFlag, 0);
+            baseMapper.update(groupDO, updateWrapper);
+        });
+    }
+
+    private String saveGroupUniqueReturnGid() {
+        String gid = RandomGenerator.generateRandom();
+        if (!gidRegisterCachePenetrationBloomFilter.contains(gid)) {
+            GroupUniqueDO groupUniqueDO = GroupUniqueDO.builder()
+                    .gid(gid)
+                    .build();
+            try {
+                groupUniqueMapper.insert(groupUniqueDO);
+            } catch (DuplicateKeyException e) {
+                return null;
+            }
+        }
+        return gid;
+    }
 }
