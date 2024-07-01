@@ -128,18 +128,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         stringRedisTemplate.expire(USER_LOGIN_KEY + requestParam.getUsername(), 30L, TimeUnit.MINUTES);
         return new UserLoginRespDTO(uuid);
     }
-//
-//    @Override
-//    public Boolean checkLogin(String username, String token) {
-//        return stringRedisTemplate.opsForHash().get(USER_LOGIN_KEY + username, token) != null;
-//    }
-//
-//    @Override
-//    public void logout(String username, String token) {
-//        if (checkLogin(username, token)) {
-//            stringRedisTemplate.delete(USER_LOGIN_KEY + username);
-//            return;
-//        }
-//        throw new ClientException("用户Token不存在或用户未登录");
-//    }
+
+    @Override
+    public Boolean checkLogin(String username, String token) {
+        return stringRedisTemplate.opsForHash().get(USER_LOGIN_KEY + username, token) != null;
+    }
+
+    @Override
+    public void logout(String username, String token) {
+        if (checkLogin(username, token)) {
+            stringRedisTemplate.delete(USER_LOGIN_KEY + username);
+            return;
+        }
+        throw new ClientException("用户Token不存在或用户未登录");
+    }
     }
